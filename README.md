@@ -8,7 +8,7 @@ This is a simple photo upload app implemented using AWS S3.
 
 - [Frontend Repo]()
 - [Deployed Client]()
-- [Deployed API]()
+- [Deployed API](https://photo-upload-api.herokuapp.com/)
 
 ### Setup Steps
 
