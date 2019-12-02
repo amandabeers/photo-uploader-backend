@@ -1,9 +1,12 @@
 const mongoose = require('mongoose')
 
 const postSchema = new mongoose.Schema({
-  description: {
+  name: {
     type: String,
     required: true
+  },
+  description: {
+    type: String
   },
   type: {
     type: String,
@@ -11,6 +14,11 @@ const postSchema = new mongoose.Schema({
   },
   url: {
     type: String,
+    required: true
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true
   }
 }, {
