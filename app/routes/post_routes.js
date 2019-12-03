@@ -66,7 +66,7 @@ router.post('/posts', requireToken, multerUpload.single('file'), (req, res, next
       return Post.create({
         name: awsRes.Key,
         description: req.body.description,
-        type: req.body.mimetype,
+        type: req.file.mimetype,
         url: awsRes.Location,
         owner: req.user.id
       })
