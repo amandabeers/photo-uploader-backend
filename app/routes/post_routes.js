@@ -32,7 +32,7 @@ const multerUpload = multer()
 
 // INDEX
 // GET /posts
-router.get('/posts', requireToken, (req, res, next) => {
+router.get('/posts', (req, res, next) => {
   Post.find()
     .then(posts => {
       // `posts` will be an array of Mongoose documents
@@ -48,7 +48,7 @@ router.get('/posts', requireToken, (req, res, next) => {
 
 // SHOW
 // GET /posts/5a7db6c74d55bc51bdf39793
-router.get('/posts/:id', requireToken, (req, res, next) => {
+router.get('/posts/:id', (req, res, next) => {
   // req.params.id will be set based on the `:id` in the route
   Post.findById(req.params.id)
     .then(handle404)
@@ -93,7 +93,9 @@ router.patch('/posts/:id', requireToken, removeBlanks, multerUpload.single('file
       requireOwnership(req, post)
 
       // pass the result of Mongoose's `.update` to the next `.then`
-      return post.update(req.body.post)
+      return post.update({
+        description: req.body.post.description
+      })
     })
     // if that succeeded, return 204 and no JSON
     .then(() => res.sendStatus(204))
